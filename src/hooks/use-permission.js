@@ -10,7 +10,6 @@ import Layout from '@/layout/index.vue'
  * 路由操作
  * */
 import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
-console.log('>>>');
 //进度条
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
