@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-Vue.use(Router)
-// import basicDemo from './modules/basic-demo'
-
 import Layout from '@/layout/index.vue'
+
+Vue.use(Router)
 
 export const constantRoutes = [
   // {
@@ -200,11 +199,14 @@ export const asyncRoutes = [
   // 404 page must be placed at the end !!!
   { path: '/:catchAll(.*)', name: 'CatchAll', redirect: '/404', hidden: true }
 ]
-const createRouter = () => new Router({
+
+export const createRouter = (routes) => new Router({
+  mode: 'hash',
   scrollBehavior: () => ({ top: 0 }),
-  routes: constantRoutes
+  routes
 })
 const router = createRouter()
+
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher

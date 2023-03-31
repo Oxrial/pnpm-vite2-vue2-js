@@ -2,15 +2,17 @@ import router from '@/router'
 import { filterAsyncRouter, progressClose, progressStart } from '@/hooks/use-permission'
 import { useBasicStore } from '@/store/basic'
 import { userInfoReq } from '@/api/user'
-import settings from './settings'
+import settings from '../settings'
 
 //路由进入前拦截
 //to:将要进入的页面 vue-router4.0 不推荐使用next()
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to) => {
   progressStart()
+  console.log(111);
   document.title = to.meta?.title // i18 page title
   const basicStore = useBasicStore()
+  console.log(basicStore)
   //not login
   if (!settings.isNeedLogin) {
     basicStore.setFilterAsyncRoutes([])

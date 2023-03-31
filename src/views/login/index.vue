@@ -46,6 +46,7 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from '@vue/composition-api'
 import { useRoute, useRouter } from 'vue2-helpers/vue-router'
+import SvgIcon from '@/components/SvgIcon'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
 import { loginReq } from '@/api/user'
