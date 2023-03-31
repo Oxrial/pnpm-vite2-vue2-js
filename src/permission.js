@@ -3,7 +3,7 @@ import { filterAsyncRouter, progressClose, progressStart } from '@/hooks/use-per
 import { useBasicStore } from '@/store/basic'
 import { userInfoReq } from '@/api/user'
 import settings from './settings'
-console.log('>>>--');
+
 //路由进入前拦截
 //to:将要进入的页面 vue-router4.0 不推荐使用next()
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist

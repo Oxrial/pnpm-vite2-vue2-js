@@ -21,7 +21,6 @@ Vue
   .use(Plugin)
   .use(ElementUI)
 const pinia = createPinia()
-console.log('>>>>__');
 
 Vue.config.productionTip = false
 const app = createApp({
