@@ -7,11 +7,10 @@ import settings from '../settings'
 //路由进入前拦截
 //to:将要进入的页面 vue-router4.0 不推荐使用next()
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
-router.beforeEach(async (to) => {
+router.beforeEach(async (to,from,next) => {
   progressStart()
-  console.log(111);
   document.title = to.meta?.title // i18 page title
-  const basicStore = useBasicStore()
+  const basicStore = useBasicStore()  
   console.log(basicStore)
   //not login
   if (!settings.isNeedLogin) {
@@ -21,7 +20,7 @@ router.beforeEach(async (to) => {
   //1.判断token
   if (basicStore.token) {
     if (to.path === '/login') {
-      return '/'
+      next('/')
     } else {
       //2.判断是否获取用户信息
       if (!basicStore.getUserInfo) {
@@ -37,21 +36,21 @@ router.beforeEach(async (to) => {
           console.error(`route permission error${e}`)
           basicStore.resetState()
           progressClose()
-          return `/login?redirect=${to.path}`
+          next(`/login?redirect=${to.path}`)
         }
       } else {
-        return true
+        next()
       }
     }
   } else {
     if (!whiteList.includes(to.path)) {
-      return `/login?redirect=${to.path}`
+      next(`/login?redirect=${to.path}`)
     } else {
-      return true
+      next()
     }
   }
 })
 //路由进入后拦截
-router.afterEach(() => {
+router.afterEach((to,from) => {
   progressClose()
 })

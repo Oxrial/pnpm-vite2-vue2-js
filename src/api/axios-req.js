@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Loading as ElLoading, Message as ElMessage, MessageBox as ElMessageBox } from 'element-ui'
+import { Loading, Message, MessageBox } from 'element-ui'
 import { useBasicStore } from '@/store/basic'
 
 //使用axios.create()创建一个axios请求实例
@@ -26,7 +26,7 @@ service.interceptors.request.use(
     //req loading
     // @ts-ignore
     if (req.reqLoading ?? true) {
-      loadingInstance = ElLoading.service({
+      loadingInstance = Loading.service({
         lock: true,
         fullscreen: true,
         // spinner: 'CircleCheck',
@@ -62,7 +62,7 @@ service.interceptors.response.use(
       return res.data
     } else {
       if (noAuthCode.includes(code)) {
-        ElMessageBox.confirm('请重新登录', {
+        MessageBox.confirm('请重新登录', {
           confirmButtonText: '重新登录',
           closeOnClickModal: false,
           showCancelButton: false,
@@ -74,7 +74,7 @@ service.interceptors.response.use(
       }
       // @ts-ignore
       if (!res.config?.isNotTipErrorMsg) {
-        ElMessage.error({
+        Message.error({
           message: msg,
           duration: 2 * 1000
         })
@@ -89,7 +89,7 @@ service.interceptors.response.use(
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }
-    ElMessage.error({
+    Message.error({
       message: err,
       duration: 2 * 1000
     })

@@ -25,7 +25,7 @@
 <script setup>
 import { ref, watch } from '@vue/composition-api'
 import { compile } from 'path-to-regexp'
-import { useRoute, useRouter } from 'vue2-helpers/vue-router'
+import { useRoute, useRouter } from '@/router'
 import { useBasicStore } from '@/store/basic'
 const levelList = ref()
 const { settings } = useBasicStore()

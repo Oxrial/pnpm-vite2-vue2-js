@@ -35,7 +35,7 @@
 </template>
 <script setup>
 import { ref } from '@vue/composition-api'
-import { useRoute } from 'vue2-helpers/vue-router'
+import { useRoute } from '@/router'
 import { useBasicStore } from '@/store/basic'
 import { useConfigStore } from '@/store/config'
 

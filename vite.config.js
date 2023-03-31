@@ -10,7 +10,8 @@ import setting from './src/settings.js'
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd(), '') // 根据服务环境获取环境变量
 	return {
-		base: setting.viteBasePath, //设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
+		base: setting.viteBasePath, 
+    //设为 false 可以避免 Vite 清屏而错过在终端中打印某些关键信息
 		clearScreen: false,
 		//server 开发时相关配置
 		server: {
@@ -22,15 +23,15 @@ export default defineConfig(({ command, mode }) => {
 			open: false,
 			//true, 启用并允许任何源
 			cors: true,
-			https: false //启用https
+			https: false, //启用https
 			//代理跨域配置
-			// proxy: {
-			//   [env.VITE_PROXY_BASE_URL]: {
-			//     target: env.VITE_PROXY_URL,
-			//     changeOrigin: true,
-			//     rewrite: (path) => path.replace(new RegExp(`^${env.VITE_PROXY_BASE_URL}`), '')
-			//   }
-			// }
+			proxy: {
+			  [env.VITE_PROXY_BASE_URL]: {
+			    target: env.VITE_PROXY_URL,
+			    changeOrigin: true,
+			    rewrite: (path) => path.replace(new RegExp(`^${env.VITE_PROXY_BASE_URL}`), '')
+			  }
+			}
 		},
 		plugins: [
 			createVuePlugin(),

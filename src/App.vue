@@ -2,10 +2,10 @@
   <router-view />
 </template>
 <script setup name="App">
+import {onBeforeMount,onMounted} from '@vue/composition-api'
 import { storeToRefs } from 'pinia'
 import  { useBasicStore } from '@/store/basic'
 import { useConfigStore } from '@/store/config'
-import {onBeforeMount,onMounted} from '@vue/composition-api'
 import { toggleHtmlClass } from '@/layout/theme/utils'
 
 const { settings } = storeToRefs( useBasicStore())

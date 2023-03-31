@@ -39,7 +39,7 @@
 
 <script setup>
 import { nextTick } from '@vue/composition-api'
-import { useRouter } from 'vue2-helpers/vue-router'
+import { useRouter } from '@/router'
 import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
 import { resetState } from '@/hooks/use-permission'

@@ -5,20 +5,21 @@ import Layout from '@/layout/index.vue'
 Vue.use(Router)
 
 export const constantRoutes = [
-  // {
-  //   path: '/redirect',
-  //   component: Layout,
-  //   hidden: true,
-  //   children: [
-  //     {
-  //       path: '/redirect/:path(.*)',
-  //       component: () => import('@/views/redirect')
-  //     }
-  //   ]
-  // },
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect')
+      }
+    ]
+  },
 
   {
     path: '/login',
+    name: 'Login',
     component: () => import('@/views/login/index.vue'),
     hidden: true
   },
@@ -200,15 +201,23 @@ export const asyncRoutes = [
   { path: '/:catchAll(.*)', name: 'CatchAll', redirect: '/404', hidden: true }
 ]
 
-export const createRouter = (routes) => new Router({
+export const createRouter = () => new Router({
   mode: 'hash',
   scrollBehavior: () => ({ top: 0 }),
-  routes
+  routes: constantRoutes
 })
 const router = createRouter()
 
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher
+}
+
+export function useRouter() {
+  return router
+}
+ 
+export function useRoute() {
+  return router.currentRoute
 }
 export default router

@@ -18,7 +18,7 @@
 <script setup>
 import { computed, watch } from '@vue/composition-api'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue2-helpers/vue-router'
+import { useRoute } from '@/router'
 import { useBasicStore } from '@/store/basic'
 import { cloneDeep } from 'lodash-es'
 const { settings, cachedViews } = storeToRefs(useBasicStore())

@@ -33,7 +33,7 @@
 <script setup>
 import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from '@vue/composition-api'
 import path from 'path'
-import { useRoute, useRouter } from 'vue2-helpers/vue-router'
+import { useRoute, useRouter } from '@/router'
 import { storeToRefs } from 'pinia'
 import { useBasicStore } from '@/store/basic'
 import { useTagsViewStore } from '@/store/tags-view'

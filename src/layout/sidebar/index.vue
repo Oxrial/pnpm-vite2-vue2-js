@@ -21,7 +21,7 @@
 <script setup>
 import { computed } from '@vue/composition-api'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue2-helpers/vue-router'
+import { useRoute } from '@/router'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 import { useBasicStore } from '@/store/basic'

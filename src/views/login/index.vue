@@ -43,9 +43,9 @@
   </div>
 </template>
 
-<script setup>
+<script setup name="Login">
 import { onMounted, reactive, ref, watch } from '@vue/composition-api'
-import { useRoute, useRouter } from 'vue2-helpers/vue-router'
+import { useRoute, useRouter } from '@/router'
 import SvgIcon from '@/components/SvgIcon'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
@@ -102,11 +102,14 @@ const router = useRouter()
 const basicStore = useBasicStore()
 
 const loginFunc = () => {
+  console.log(111);
   loginReq(subForm)
-    .then(({ data }) => {
+    .then(( res ) => {
+      console.log(res);
       elMessage('登录成功')
-      basicStore.setToken(data?.jwtToken)
-      router.push('/')
+      basicStore.setToken(res.data?.jwtToken)
+      console.log(this,router,basicStore);
+      // router.push('/')
     })
     .catch((err) => {
       tipMessage = err?.msg
