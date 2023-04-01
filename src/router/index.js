@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { getCurrentInstance } from '@vue/composition-api'
 import Layout from '@/layout/index.vue'
-
 Vue.use(Router)
-
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -214,6 +213,7 @@ export function resetRouter() {
 }
 
 export function useRouter() {
+  console.log(getCurrentInstance());
   return router
 }
  

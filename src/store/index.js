@@ -1,9 +1,11 @@
+import {useBasicStore} from './basic'
+import {useConfigStore} from './config'
+import {useTagsViewStore} from './tags-view'
+const appStore = {}
+export const registerStore = () => {
+  appStore.useBasicStore = useBasicStore();
+  appStore.useConfigStore = useConfigStore();
+  appStore.useTagsViewStore = useTagsViewStore();
+};
 
-import Vue from 'vue'
-import { createPinia, PiniaVuePlugin } from 'pinia'
-import piniaPersist from 'pinia-plugin-persist'
-// const pinia = createPinia()
-Vue
-  .use(PiniaVuePlugin)
-  .use(piniaPersist)
-// export default pinia
+export default appStore;

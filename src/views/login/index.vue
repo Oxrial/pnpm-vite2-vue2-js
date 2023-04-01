@@ -44,15 +44,16 @@
 </template>
 
 <script setup name="Login">
-import { onMounted, reactive, ref, watch } from '@vue/composition-api'
+import { onMounted, reactive, ref, watch, getCurrentInstance } from '@vue/composition-api'
 import { useRoute, useRouter } from '@/router'
 import SvgIcon from '@/components/SvgIcon'
-import { useBasicStore } from '@/store/basic'
+import { storeToRefs } from 'pinia'
+import appStore from '@/store'
 import { elMessage, useElement } from '@/hooks/use-element'
 import { loginReq } from '@/api/user'
 
 /* listen router change and set the query  */
-const { settings } = useBasicStore()
+const { settings } = appStore.useBasicStore
 //element valid
 const formRules = useElement().formRules
 //form
@@ -98,18 +99,19 @@ const handleLogin = () => {
     if (valid) loginFunc()
   })
 }
-const router = useRouter()
-const basicStore = useBasicStore()
-
+let proxy = ref(null)
+onMounted(() => {
+  proxy = getCurrentInstance()
+})
 const loginFunc = () => {
   console.log(111);
   loginReq(subForm)
     .then(( res ) => {
-      console.log(res);
       elMessage('登录成功')
-      basicStore.setToken(res.data?.jwtToken)
-      console.log(this,router,basicStore);
-      // router.push('/')
+      const router = useRouter()
+      appStore.useBasicStore.setToken(res.data?.jwtToken)
+      console.log('---=>',appStore);
+      router.push('/')
     })
     .catch((err) => {
       tipMessage = err?.msg

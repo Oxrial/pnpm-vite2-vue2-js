@@ -1,6 +1,6 @@
 import router from '@/router'
 import { filterAsyncRouter, progressClose, progressStart } from '@/hooks/use-permission'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 import { userInfoReq } from '@/api/user'
 import settings from '../settings'
 
@@ -10,8 +10,8 @@ const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to,from,next) => {
   progressStart()
   document.title = to.meta?.title // i18 page title
-  const basicStore = useBasicStore()  
-  console.log(basicStore)
+  const basicStore = appStore.useBasicStore
+  console.log('--->',basicStore)
   //not login
   if (!settings.isNeedLogin) {
     basicStore.setFilterAsyncRoutes([])

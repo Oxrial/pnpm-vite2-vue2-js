@@ -12,7 +12,7 @@ import Layout from '@/layout/index.vue'
 import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 //进度条
 import 'nprogress/nprogress.css'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 
 const buttonCodes = [] //按钮权限
 export const filterAsyncRoutesByMenuList = (menuList) => {
@@ -139,7 +139,7 @@ export function filterAsyncRouter({ menuList, roles, codes }) {
   }
   accessRoutes.forEach((route) => router.addRoute(route))
   asyncRoutes.forEach((item) => router.addRoute(item))
-  const basicStore = useBasicStore()
+  const basicStore = appStore.useBasicStore
   basicStore.setFilterAsyncRoutes(accessRoutes)
 }
 //重置路由
@@ -156,7 +156,7 @@ export function resetRouter() {
 //重置登录状态
 export function resetState() {
   resetRouter()
-  useBasicStore().resetState()
+  appStore.useBasicStore.resetState()
 }
 
 //刷新路由
