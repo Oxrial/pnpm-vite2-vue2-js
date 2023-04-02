@@ -19,9 +19,9 @@
 import { computed, watch } from '@vue/composition-api'
 import { storeToRefs } from 'pinia'
 import { useRoute } from '@/router'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 import { cloneDeep } from 'lodash-es'
-const { settings, cachedViews } = storeToRefs(useBasicStore())
+const { settings, cachedViews } = storeToRefs(appStore.useBasicStore)
 const route = useRoute()
 const key = computed(() => route.path)
 /*listen the component name changing, then to keep-alive the page*/
@@ -30,7 +30,7 @@ const key = computed(() => route.path)
 let oldRoute = {}
 let cacheGroup = []
 let deepOldRouter = null
-const basicStore = useBasicStore()
+const basicStore = appStore.useBasicStore
 const removeDeepChildren = (deepOldRouter) => {
   deepOldRouter.children?.forEach((fItem) => {
     basicStore.delCacheViewDeep(fItem.name)

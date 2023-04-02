@@ -35,11 +35,9 @@
 </template>
 <script setup>
 import { ref } from '@vue/composition-api'
-import { useRoute } from '@/router'
-import { useBasicStore } from '@/store/basic'
-import { useConfigStore } from '@/store/config'
+import appStore from '@/store'
 
-const { setTheme, setSize  } = useConfigStore()
+const { setTheme, setSize  } = appStore.useConfigStore
 const count = ref(0)
 
 //send req test
@@ -52,7 +50,7 @@ const sendReq = () => {
   axiosReq(reqConfig)
 }
 //cancel req
-const { axiosPromiseArr } = useBasicStore()
+const { axiosPromiseArr } = appStore.useBasicStore
 const cancelReq = () => {
   //cancel all req when page switch
   if (axiosPromiseArr.length) {

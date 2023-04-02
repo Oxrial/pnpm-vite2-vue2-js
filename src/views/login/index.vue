@@ -45,13 +45,15 @@
 
 <script setup name="Login">
 import { onMounted, reactive, ref, watch, getCurrentInstance } from '@vue/composition-api'
-import { useRoute, useRouter } from '@/router'
 import SvgIcon from '@/components/SvgIcon'
-import { storeToRefs } from 'pinia'
 import appStore from '@/store'
 import { elMessage, useElement } from '@/hooks/use-element'
 import { loginReq } from '@/api/user'
 
+let instance = null
+onMounted(() => {
+  instance = getCurrentInstance()
+})
 /* listen router change and set the query  */
 const { settings } = appStore.useBasicStore
 //element valid
@@ -65,7 +67,7 @@ const state = reactive({
   otherQuery: {},
   redirect: undefined
 })
-const route = useRoute()
+// const route = instance.proxy.$route
 const getOtherQuery = (query) => {
   return Object.keys(query).reduce((acc, cur) => {
     if (cur !== 'redirect') {
@@ -75,7 +77,7 @@ const getOtherQuery = (query) => {
   }, {})
 }
 watch(
-  () => route.query,
+  () => instance && instance.proxy.$route,
   (query) => {
     if (query) {
       state.redirect = query.redirect
@@ -99,19 +101,13 @@ const handleLogin = () => {
     if (valid) loginFunc()
   })
 }
-let proxy = ref(null)
-onMounted(() => {
-  proxy = getCurrentInstance()
-})
 const loginFunc = () => {
-  console.log(111);
   loginReq(subForm)
     .then(( res ) => {
       elMessage('登录成功')
-      const router = useRouter()
       appStore.useBasicStore.setToken(res.data?.jwtToken)
-      console.log('---=>',appStore);
-      router.push('/')
+      instance.proxy.$router.push('/')
+      // router.push('/')
     })
     .catch((err) => {
       tipMessage = err?.msg

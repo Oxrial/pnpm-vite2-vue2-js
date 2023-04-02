@@ -11,7 +11,6 @@
         :collapse-transition="false"
         mode="vertical"
       >
-      {{ allRoutes }}
         <sidebar-item v-for="route in allRoutes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
@@ -24,8 +23,8 @@ import { storeToRefs } from 'pinia'
 import { useRoute } from '@/router'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
-import { useBasicStore } from '@/store/basic'
-const { settings, allRoutes, sidebar } = storeToRefs(useBasicStore())
+import appStore from '@/store'
+const { settings, allRoutes, sidebar } = storeToRefs(appStore.useBasicStore)
 const routeInstance = useRoute()
 const activeMenu = computed(() => {
   const { meta, path } = routeInstance

@@ -16,9 +16,9 @@ import Sidebar from './sidebar/index.vue'
 import AppMain from './app-main/index.vue'
 import Navbar from './app-main/Navbar.vue'
 import TagsView from './app-main/TagsView.vue'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 import { resizeHandler } from '@/hooks/use-layout'
-const { sidebar, settings } = useBasicStore()
+const { sidebar, settings } = appStore.useBasicStore
 const classObj = computed(() => {
   return {
     closeSidebar: !sidebar.opened,

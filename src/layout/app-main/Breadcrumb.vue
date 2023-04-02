@@ -26,9 +26,9 @@
 import { ref, watch } from '@vue/composition-api'
 import { compile } from 'path-to-regexp'
 import { useRoute, useRouter } from '@/router'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 const levelList = ref()
-const { settings } = useBasicStore()
+const { settings } = appStore.useBasicStore
 const route = useRoute()
 const getBreadcrumb = () => {
   // only show routes with has  meta.title

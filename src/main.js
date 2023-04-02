@@ -5,7 +5,7 @@ import ElementUI from 'element-ui'
 import { Plugin } from "vue-fragment"
 import { createPinia, PiniaVuePlugin } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persist'
-import {registerStore} from '@/store'
+import { registerStore } from '@/store'
 import router from './router'
 import '@/router/permission'
 import 'element-ui/lib/theme-chalk/index.css'

@@ -2,19 +2,27 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { getCurrentInstance } from '@vue/composition-api'
 import Layout from '@/layout/index.vue'
+
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject)
+    return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch((err) => err)
+}
 Vue.use(Router)
+
 export const constantRoutes = [
-  {
-    path: '/redirect',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect')
-      }
-    ]
-  },
+  // {
+  //   path: '/redirect',
+  //   component: Layout,
+  //   hidden: true,
+  //   children: [
+  //     {
+  //       path: '/redirect/:path(.*)',
+  //       component: () => import('@/views/redirect')
+  //     }
+  //   ]
+  // },
 
   {
     path: '/login',
@@ -35,14 +43,27 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     children: [
       {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
+        path: 'home',
+        name: 'Home',
+        component: () => import('@/views/home/index.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
+        meta: { title: '首页', elSvgIcon: 'el-icon-s-home', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/test',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Test',
+        component: () => import('@/views/test-show/index.vue'),
+        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+        meta: { title: 'TEST', elSvgIcon: 'el-icon-s-promotion', affix: true }
       }
     ]
   },
@@ -213,11 +234,10 @@ export function resetRouter() {
 }
 
 export function useRouter() {
-  console.log(getCurrentInstance());
-  return router
+  return getCurrentInstance().proxy.$router
 }
  
 export function useRoute() {
-  return router.currentRoute
+  return getCurrentInstance().proxy.$route
 }
 export default router

@@ -17,9 +17,9 @@
 
 <script setup>
 import { reactive, toRefs } from '@vue/composition-api'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 import SvgIcon from '@/components/SvgIcon.vue'
-const { settings } = useBasicStore()
+const { settings } = appStore.useBasicStore
 defineProps({
   //是否折叠
   collapse: {

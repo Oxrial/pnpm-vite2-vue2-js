@@ -4,7 +4,7 @@
  * @returns {Boolean}
  */
 import { onBeforeMount, onBeforeUnmount, onMounted } from '@vue/composition-api'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 export function isExternal(path) {
   return /^(https?:|mailto:|tel:)/.test(path)
 }
@@ -13,7 +13,7 @@ export function isExternal(path) {
 export function resizeHandler() {
   const { body } = document
   const WIDTH = 992
-  const basicStore = useBasicStore()
+  const basicStore = appStore.useBasicStore
   const isMobile = () => {
     const rect = body.getBoundingClientRect()
     return rect.width - 1 < WIDTH

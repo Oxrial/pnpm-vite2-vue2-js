@@ -32,11 +32,10 @@
 
 <script setup>
 import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from '@vue/composition-api'
-import path from 'path'
+import path from 'path-browserify'
 import { useRoute, useRouter } from '@/router'
 import { storeToRefs } from 'pinia'
-import { useBasicStore } from '@/store/basic'
-import { useTagsViewStore } from '@/store/tags-view'
+import appStore from '@/store'
 const route = useRoute()
 const router = useRouter()
 const state = reactive({
@@ -47,7 +46,7 @@ const state = reactive({
   affixTags: []
 })
 
-const { visitedViews } = storeToRefs(useTagsViewStore())
+const { visitedViews } = storeToRefs(appStore.useTagsViewStore)
 
 watch(
   () => route.path,
@@ -103,8 +102,8 @@ const filterAffixTags = (routes, basePath = '/') => {
 }
 
 //初始
-const tagsViewStore = useTagsViewStore()
-const { allRoutes } = useBasicStore()
+const tagsViewStore = appStore.useTagsViewStore
+const { allRoutes } = appStore.useBasicStore
 const initTags = () => {
   //过滤affix=true的tags数组并赋值给state.affixTags，挂载到页面上
   const affixTags = (state.affixTags = filterAffixTags(allRoutes))
@@ -142,7 +141,7 @@ const openMenu = (tag, e) => {
   state.selectedTag = tag
 }
 
-const basicStore = useBasicStore()
+const basicStore = appStore.useBasicStore
 
 //关闭当前标签
 const closeSelectedTag = (view) => {

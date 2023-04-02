@@ -6,7 +6,6 @@ import ScriptSetup from 'unplugin-vue2-script-setup/vite'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import path from 'path'
 import setting from './src/settings.js'
-
 export default defineConfig(({ command, mode }) => {
 	const env = loadEnv(mode, process.cwd(), '') // 根据服务环境获取环境变量
 	return {

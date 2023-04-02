@@ -3,16 +3,15 @@
     <template v-if="!item.hidden">
       <template v-if="showSidebarItem(item.children, item)">
         <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-        {{ item }}
           <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
-            <i :class="onlyOneChild.meta.icon || item.meta.icon"></i>
+            <MenuIcon :meta="onlyOneChild.meta || item.meta" />
             <template #title>{{ onlyOneChild.meta?.title }}</template>
           </el-menu-item>
         </Link>
       </template>
       <el-sub-menu v-else :index="resolvePath(item.path)">
         <template v-if="item.meta" #title>
-          <i :class="item.meta.icon"></i>
+          <MenuIcon :meta="onlyOneChild.meta || item.meta" />
           <span>{{ item.meta.title }}</span>
         </template>
         <SidebarItem
@@ -29,10 +28,10 @@
 
 <script setup>
 import { ref } from '@vue/composition-api'
-import path from 'path'
+import { resolve } from 'path-browserify'
 import Link from './Link.vue'
+import MenuIcon from './MenuIcon.vue'
 import { isExternal } from '@/hooks/use-layout'
-
 const props = defineProps({
   //每一个router Item
   item: {
@@ -77,6 +76,6 @@ const resolvePath = (routePath) => {
   if (isExternal(props.basePath)) {
     return props.basePath
   }
-  return path.resolve(props.basePath, routePath)
+  return resolve(props.basePath, routePath)
 }
 </script>

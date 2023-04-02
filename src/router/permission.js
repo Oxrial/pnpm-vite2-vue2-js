@@ -10,31 +10,30 @@ const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to,from,next) => {
   progressStart()
   document.title = to.meta?.title // i18 page title
-  const basicStore = appStore.useBasicStore
-  console.log('--->',basicStore)
+  // const basicStore = appStore.useBasicStore
   //not login
   if (!settings.isNeedLogin) {
-    basicStore.setFilterAsyncRoutes([])
+    appStore.useBasicStore.setFilterAsyncRoutes([])
     return true
   }
   //1.判断token
-  if (basicStore.token) {
+  if (appStore.useBasicStore.token) {
     if (to.path === '/login') {
       next('/')
     } else {
       //2.判断是否获取用户信息
-      if (!basicStore.getUserInfo) {
+      if (!appStore.useBasicStore.getUserInfo) {
         try {
           const userData = await userInfoReq()
           //3.动态路由权限筛选
           filterAsyncRouter(userData)
           //4.保存用户信息到store
-          basicStore.setUserInfo(userData)
+          appStore.useBasicStore.setUserInfo(userData)
           //5.再次执行路由跳转
-          return { ...to, replace: true }
+          next({ ...to, replace: true })
         } catch (e) {
           console.error(`route permission error${e}`)
-          basicStore.resetState()
+          appStore.useBasicStore.resetState()
           progressClose()
           next(`/login?redirect=${to.path}`)
         }

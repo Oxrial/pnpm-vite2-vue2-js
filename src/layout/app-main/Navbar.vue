@@ -18,7 +18,6 @@
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
           <img src="https://github.jzfai.top/file/images/nav-right-logo.gif" class="user-avatar" />
-          bbb
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -44,9 +43,9 @@ import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
 import { resetState } from '@/hooks/use-permission'
 import { Message } from 'element-ui'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 
-const basicStore = useBasicStore()
+const basicStore = appStore.useBasicStore
 const { settings, sidebar, setToggleSideBar } = basicStore
 const toggleSideBar = () => {
   setToggleSideBar()

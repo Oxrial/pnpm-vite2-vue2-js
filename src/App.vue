@@ -1,19 +1,21 @@
 <template>
-  <router-view />
+  <Fragment>
+    <router-view />
+  </Fragment>
 </template>
 <script setup name="App">
 import {onBeforeMount,onMounted} from '@vue/composition-api'
-import { storeToRefs } from 'pinia'
-import  { useBasicStore } from '@/store/basic'
-import { useConfigStore } from '@/store/config'
+import  appStore  from '@/store'
 import { toggleHtmlClass } from '@/layout/theme/utils'
 
-const { settings } = storeToRefs( useBasicStore())
+// const { settings } = appStore.useBasicStore
 onBeforeMount(() => {
-  if (!settings.value.isNeedLogin) useBasicStore().setToken(settings.value.tmpToken)
+  if (!appStore.useBasicStore.settings.isNeedLogin){ 
+    appStore.useBasicStore.setToken(appStore.useBasicStore.settings.tmpToken)
+  }
 })
 onMounted(() => {
-  const { setTheme, theme, setSize, size } = useConfigStore()
+  const { setTheme, theme, setSize, size } = appStore.useConfigStore
   setTheme(theme)
   setSize(size)
   toggleHtmlClass(theme)

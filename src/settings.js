@@ -1,5 +1,6 @@
 export const settings = {
   title: 'pnpm-vite-vue2-js',
+  path: null,
   /**
    * @type {boolean} true | false
    * @description 是否显示图标和标题（Logo）

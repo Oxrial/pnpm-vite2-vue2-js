@@ -129,7 +129,7 @@ function hasCodePermission(codes, routeItem) {
 //过滤异步路由
 export function filterAsyncRouter({ menuList, roles, codes }) {
   let accessRoutes = []
-  const permissionMode = basicStore.settings?.permissionMode
+  const permissionMode = appStore.useBasicStore.settings?.permissionMode
   if (permissionMode === 'rbac') {
     accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
   } else if (permissionMode === 'roles') {
@@ -139,8 +139,7 @@ export function filterAsyncRouter({ menuList, roles, codes }) {
   }
   accessRoutes.forEach((route) => router.addRoute(route))
   asyncRoutes.forEach((item) => router.addRoute(item))
-  const basicStore = appStore.useBasicStore
-  basicStore.setFilterAsyncRoutes(accessRoutes)
+  appStore.useBasicStore.setFilterAsyncRoutes(accessRoutes)
 }
 //重置路由
 export function resetRouter() {

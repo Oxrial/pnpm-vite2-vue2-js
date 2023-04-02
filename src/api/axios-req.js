@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Loading, Message, MessageBox } from 'element-ui'
-import { useBasicStore } from '@/store/basic'
+import appStore from '@/store'
 
 //使用axios.create()创建一个axios请求实例
 const service = axios.create()
@@ -9,7 +9,7 @@ let tempReqUrlSave = ''
 //请求前拦截
 service.interceptors.request.use(
   (req) => {
-    const { token, axiosPromiseArr } = useBasicStore()
+    const { token, axiosPromiseArr } = appStore.useBasicStore
     //axiosPromiseArr收集请求地址,用于取消请求
     req.cancelToken = new axios.CancelToken((cancel) => {
       tempReqUrlSave = req.url
@@ -46,7 +46,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (res) => {
     //取消请求
-    useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
+    appStore.useBasicStore.remotePromiseArrByReqUrl(tempReqUrlSave)
 
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
@@ -69,7 +69,7 @@ service.interceptors.response.use(
           showClose: false,
           type: 'warning'
         }).then(() => {
-          useBasicStore().resetStateAndToLogin()
+          appStore.useBasicStore.resetStateAndToLogin()
         })
       }
       // @ts-ignore
@@ -85,7 +85,7 @@ service.interceptors.response.use(
   //响应报错
   (err) => {
     //取消请求
-    useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
+    appStore.useBasicStore.remotePromiseArrByReqUrl(tempReqUrlSave)
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }

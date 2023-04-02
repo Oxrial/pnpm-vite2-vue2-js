@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "types": [
+      "unplugin-vue2-script-setup/types",
+      "pinia-plugin-persist"
+    ]
+  },
+  "vueCompilerOptions": {
+      "experimentalCompatMode": 2 // vue2 的框架需要加这个配置
+  }
+}
