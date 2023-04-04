@@ -39,7 +39,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description 是否显示导航栏（NavBar）
    */
-  showTopNavbar: true,
+  showTopNavbar: false,
   /* page  animation related*/
   /**
    * @type {boolean} true | false

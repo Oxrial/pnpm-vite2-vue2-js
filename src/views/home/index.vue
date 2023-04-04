@@ -6,4 +6,7 @@
 </script>
 
 <style scoped lang='scss'>
+:root {
+  width: 100px;
+}
 </style>

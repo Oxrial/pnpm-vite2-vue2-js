@@ -3,7 +3,7 @@
     <!--logo-->
     <Logo v-if="settings.sidebarLogo" :collapse="!sidebar.opened" />
     <!--router menu-->
-    <el-scrollbar>
+    <el-scrollbar style="height: calc(100vh - 50px);">
       <el-menu
         class="el-menu-vertical"
         :collapse="!sidebar.opened"

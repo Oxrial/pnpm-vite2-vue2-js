@@ -30,7 +30,7 @@ resizeHandler()
 
 <style lang="scss" scoped>
 .main-container {
-  min-height: 100%;
+  height: 100%;
   transition: margin-left var(--sideBar-switch-duration);
   margin-left: var(--side-bar-width);
   position: relative;

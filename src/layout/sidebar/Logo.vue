@@ -2,12 +2,12 @@
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebar-logo-fade">
       <!--  折叠显示   -->
-      <router-link v-if="collapse" class="sidebar-logo-link" to="/">
+      <router-link v-if="collapse" tag="div" class="sidebar-logo-link" to="/">
         <svg-icon v-if="logo" :icon-class="logo" class="sidebar-logo" />
         <h1 v-else class="sidebar-title">{{ title }}</h1>
       </router-link>
       <!--  正常显示   -->
-      <router-link v-else class="sidebar-logo-link" to="/">
+      <router-link v-else tag="div" class="sidebar-logo-link" to="/">
         <svg-icon v-if="logo" :icon-class="logo" class="sidebar-logo" />
         <h1 class="sidebar-title">{{ title }}</h1>
       </router-link>
