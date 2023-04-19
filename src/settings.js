@@ -30,7 +30,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description 是否显示标签栏（TagsView）
    */
-  showTagsView: true,
+  showTagsView: false,
   /**
    * @description 显示标签栏时，配置最多显示标签的个数，超过将会替换最后一个标签
    */
@@ -39,7 +39,7 @@ export const settings = {
    * @type {boolean} true | false
    * @description 是否显示导航栏（NavBar）
    */
-  showTopNavbar: false,
+  showTopNavbar: true,
   /* page  animation related*/
   /**
    * @type {boolean} true | false

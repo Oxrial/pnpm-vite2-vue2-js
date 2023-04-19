@@ -11,9 +11,9 @@
   </Fragment>
 </template>
 
-<script setup name="Test">
-import ElVirtualSelect from '@/components/ElVirtualSelect'
+<script setup name="ElVirtualSelectDemo">
 import { ref } from '@vue/composition-api'
+import ElVirtualSelect from '@/components/ElVirtualSelect/index.vue'
 const options = Array.from({ length: 1000 }).map((i, index) => ({
   label: 'Label' + index,
   value: 'Value' + index

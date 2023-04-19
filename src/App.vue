@@ -22,5 +22,7 @@ onMounted(() => {
 })
 </script>
 <style lang="scss">
-
+html,body{
+  background: #ddd;
+}
 </style>

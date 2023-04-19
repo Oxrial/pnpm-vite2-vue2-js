@@ -61,7 +61,7 @@ export const constantRoutes = [
       {
         path: 'index',
         name: 'Test',
-        component: () => import('@/views/test-show/index.vue'),
+        component: () => import('@/views/show/index.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
         meta: { title: 'TEST', elSvgIcon: 'el-icon-s-promotion', affix: true }
       }

@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import SvgIcon from '@/components/SvgIcon.vue'
+import SvgIcon from '@/components/SvgIcon'
 defineProps({
   isActive: {
     type: Boolean,
